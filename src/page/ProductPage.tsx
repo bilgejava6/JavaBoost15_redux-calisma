@@ -1,12 +1,12 @@
 import React from 'react'
 import UrunArama from '../components/molecules/UrunArama'
 import UrunListesi from '../components/organishm/UrunListesi'
-import Sepet from '../components/molecules/Sepet'
+import Sepet from '../components/organishm/Sepet'
 
 function ProductPage() {
   return (
     <div className="container">
-        <div className="row mt-4">
+        <div className="row mt-4 ">
             <div className="col-8">                               
                 <div className="row">
                     <UrunArama />
@@ -16,7 +16,7 @@ function ProductPage() {
                 </div>
             </div>
             <div className="col-4">
-                    <Sepet />
+                    <Sepet sepetList={[]}/>
             </div>
         </div>
     </div>
