@@ -13,7 +13,7 @@ function UrunItem(props: IUrunItemProps) {
     <div className="row m-2 border p-2 rounded-3" style={{width:'95%'}}>
         <div className="col-2">
             <img src={image}
-            style={{borderRadius:'100%'}} />
+            style={{width:'40px',height:'40px',borderRadius:'100%'}} />
         </div>
         <div className="col-7 align-content-center">
             <label className='form-label'>{title}</label>

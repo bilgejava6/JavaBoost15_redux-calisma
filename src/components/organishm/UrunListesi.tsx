@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import UrunCard from '../molecules/UrunCard'
 import { IProduct } from '../../models/IProduct';
-
-function UrunListesi() {
+interface IUrunListesi{
+  sepeteEkle: (urun: IProduct)=>void
+}
+function UrunListesi(props: IUrunListesi) {
   /**
    * DİKKAT!!!!
    * bir sayfayı render etmek için React in değişiklik algılaması gerekli
@@ -39,7 +41,7 @@ function UrunListesi() {
         <div className="row">        
             {
               liste?.map((urun,index)=>{
-                return <UrunCard key={index} urun={urun}/>
+                return <UrunCard key={index} urun={urun} sepeteEkle={props.sepeteEkle}/>
               })
             }
         </div>

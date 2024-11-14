@@ -1,7 +1,8 @@
 import React from 'react'
 import { IProduct } from '../../models/IProduct'
 interface IUrunCardProps{
-    urun: IProduct
+    urun: IProduct,
+    sepeteEkle: (urun: IProduct)=>void
 }
 function UrunCard(props: IUrunCardProps) {
   const urun = props.urun
@@ -17,7 +18,7 @@ function UrunCard(props: IUrunCardProps) {
                 <p className="card-text">{urun.title}</p>
                 <p className="card-text">{urun.price} $</p>
                 <div className="d-grid">
-                    <input type="button" value="Sepete Ekle" className='btn btn-outline-info' />
+                    <input onClick={()=>props.sepeteEkle(urun)} type="button" value="Sepete Ekle" className='btn btn-outline-info' />
                 </div>
             </div>
         </div>
