@@ -4,15 +4,20 @@
  * 3- slice
  */
 
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { IProduct } from "../../models/IProduct";
 
 // step - 1 
-const initialProductState = {
+interface IProductState{
+    productList: IProduct[],
+    isProductListLoading: boolean,
+    sepetListesi: IProduct[]
+}
+const initialProductState: IProductState = {
     productList: [], // ürün listesini temsil eder
     isProductListLoading: false, // ürün listesi yükleniyor mu?
     sepetListesi: []
 }
-
 // step - 2
 export const fetchGetAllProducts = createAsyncThunk(
     'product/fetchGetAllProducts',
@@ -22,12 +27,18 @@ export const fetchGetAllProducts = createAsyncThunk(
         .then(data=>data);
     }
 );
-
 // step - 3
 const productSlice = createSlice({
     name: 'product',
     initialState: initialProductState,
-    reducers: {},
+    // state içerisindeki değerleri değiştirmek için kullanılan methodlar yazıyoruz.
+    reducers: {
+        addSepetList(state, action: PayloadAction<IProduct>){
+            const list: IProduct[] = state.sepetListesi;
+            list.push(action.payload);
+            state.sepetListesi = list;
+        }
+    },
     extraReducers: (build)=>{
         // fetch işlemlerinin takibi ve sonuca göre işlemleri yapıyoruz.
         build.addCase(fetchGetAllProducts.pending,(state)=>{
@@ -41,5 +52,7 @@ const productSlice = createSlice({
         });
     }
 })
-
+export const {
+    addSepetList
+} = productSlice.actions;
 export default productSlice.reducer;

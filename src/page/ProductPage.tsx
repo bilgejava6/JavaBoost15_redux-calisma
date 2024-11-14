@@ -5,7 +5,7 @@ import Sepet from '../components/organishm/Sepet'
 import { IProduct } from '../models/IProduct';
 
 function ProductPage() {
-  const [sepetList, setSepetList] = useState<IProduct[]>([]);
+  //const [sepetList, setSepetList] = useState<IProduct[]>([]);
   /**
    * liste = [4,7,9,1,3]
    * ...liste -> 4,7,9,1,3
@@ -15,9 +15,9 @@ function ProductPage() {
    * urun = {u5}
    * [...sepetList,urun] -> [{u1},{u2},{u3},{u4},{u5}]
    */
-  const ahmetAbiSepeteEkle = (urun: IProduct)=>{
-      setSepetList([...sepetList, urun]);
-  }
+ // const ahmetAbiSepeteEkle = (urun: IProduct)=>{
+ //     setSepetList([...sepetList, urun]);
+ // }
   console.log('producr page render');
   return (
     <div className="container">
@@ -27,11 +27,11 @@ function ProductPage() {
                     <UrunArama />
                 </div>
                 <div className="row">
-                    <UrunListesi sepeteEkle={ahmetAbiSepeteEkle} />
+                    <UrunListesi  />
                 </div>
             </div>
             <div className="col-4">
-                    <Sepet sepetList={sepetList}/>
+                    <Sepet />
             </div>
         </div>
     </div>

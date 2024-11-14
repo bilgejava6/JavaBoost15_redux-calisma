@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import UrunCard from '../molecules/UrunCard'
 import { IProduct } from '../../models/IProduct';
-interface IUrunListesi{
-  sepeteEkle: (urun: IProduct)=>void
-}
-function UrunListesi(props: IUrunListesi) {
+import { fetchGetAllProducts } from '../../store/feature/productSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { ProductDispatch, useAppSelector } from '../../store';
+
+function UrunListesi() {
+  /**
+   * DİKKAT!!!!
+   * değişken tipi bir değere farklı bilgiler girilmesin
+   * diye yapılır.
+   * int sayi = "beş"; // yazılmaz çünkü değer türü int
+   * 
+   */
+  const dispatch = useDispatch<ProductDispatch>();
+  const liste = useAppSelector(gState=> gState.product.productList);
+  const isLoding = useAppSelector(s=> s.product.isProductListLoading);
   /**
    * DİKKAT!!!!
    * bir sayfayı render etmek için React in değişiklik algılaması gerekli
@@ -19,7 +30,7 @@ function UrunListesi(props: IUrunListesi) {
    * sefer çalıştırılması sağlanır.
    * 
    */
-  const [liste, setListe] = useState<IProduct[]>();
+  //const [liste, setListe] = useState<IProduct[]>();
   /**
    * use effect, kendisine verilen bileşenler takip eder, eğer bu bileşenlerde
    * bir değşiklik olur ise içerisinde var olan arrowfunction ı tetikler.
@@ -27,21 +38,27 @@ function UrunListesi(props: IUrunListesi) {
    * useEffect içerisi sadece sayfa yüklenirken 1 defa çalışır ve bir daha çalışmaz.
    */
   useEffect(()=>{
-      fetch('https://dummyjson.com/products')
-        .then(res => res.json())
-        .then(urunler=>{
-          setListe(urunler.products)    
-        } );
+    /**
+     * DİKKAT!!!!
+     * asyncThunk tanımlarını direkt çağıramazsınız
+     * çalıştırmak için useDispatch kullanmalısınız
+     */
+     dispatch(fetchGetAllProducts());
   },[]);
   
  console.log('ürün listesi render');
   return (
     <div className="col p-3 rounded-3 mt-4" style={{boxShadow: '0px 0px 1px 1px rgba(0,0,0,0.46)'}}>
         <label className='form-label'>Ürün listesi</label>
-        <div className="row">        
+        <div className="row"> 
+          {
+            isLoding ? 
+            <iframe src="https://lottie.host/embed/b75e387b-4df1-4d28-a9d1-54d9e4eb109e/AHKNVAPkRe.json"></iframe> 
+            : null
+          }       
             {
               liste?.map((urun,index)=>{
-                return <UrunCard key={index} urun={urun} sepeteEkle={props.sepeteEkle}/>
+                return <UrunCard key={index} urun={urun} />
               })
             }
         </div>

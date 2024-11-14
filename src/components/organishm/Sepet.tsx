@@ -1,11 +1,11 @@
 import React from 'react'
 import UrunItem from '../molecules/UrunItem'
 import { IProduct } from '../../models/IProduct'
-interface ISepetProps{
-    sepetList: IProduct[]
-}
-function Sepet(props: ISepetProps) {
-  const sepetList = props.sepetList;
+import { useAppSelector } from '../../store'
+
+function Sepet() {
+  const sepetList: IProduct[] = useAppSelector(state=>state.product.sepetListesi);
+  console.log('sepet render');
   return (
     <div className="row p-3 rounded-3 ms-2" style={{boxShadow: '0px 0px 1px 1px rgba(0,0,0,0.46)'}}>
         <div className="col">
