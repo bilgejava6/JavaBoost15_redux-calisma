@@ -1,4 +1,6 @@
 import productSlice from './productSlice'
+import anketSlice from './anketSlice'
 export {
-    productSlice
+    productSlice,
+    anketSlice
 }

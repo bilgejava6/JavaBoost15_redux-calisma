@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
-    productSlice
+    productSlice, anketSlice
 } from './feature'
 import { useSelector } from "react-redux";
 
 const store = configureStore({
     reducer: {
-        product: productSlice
+        product: productSlice,
+        anket: anketSlice
     }
 })
 export type ProductDispatch = typeof store.dispatch;

@@ -2,9 +2,21 @@ import React from 'react'
 import UrunItem from '../molecules/UrunItem'
 import { IProduct } from '../../models/IProduct'
 import { useAppSelector } from '../../store'
-
+import { getDatabase, ref, set, onChildAdded,onChildChanged  } from "firebase/database";
 function Sepet() {
   const sepetList: IProduct[] = useAppSelector(state=>state.product.sepetListesi);
+    const db = getDatabase();
+    const coomentRef =  ref(getDatabase(),'users')
+   onChildAdded(coomentRef,(snapshot) => {
+    const user = snapshot.val();
+    console.log('Yeni kullanıcı eklendi:', user);
+    })    
+
+    onChildChanged(coomentRef, (snapshot) => {
+    const user = snapshot.val();
+    console.log('Kullanıcı güncellendi:', user);
+    });
+
   console.log('sepet render');
   return (
     <div className="row p-3 rounded-3 ms-2" style={{boxShadow: '0px 0px 1px 1px rgba(0,0,0,0.46)'}}>

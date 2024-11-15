@@ -3,7 +3,7 @@ import UrunArama from '../components/molecules/UrunArama'
 import UrunListesi from '../components/organishm/UrunListesi'
 import Sepet from '../components/organishm/Sepet'
 import { IProduct } from '../models/IProduct';
-
+import { getDatabase, ref, set } from "firebase/database";
 function ProductPage() {
   //const [sepetList, setSepetList] = useState<IProduct[]>([]);
   /**
@@ -18,6 +18,12 @@ function ProductPage() {
  // const ahmetAbiSepeteEkle = (urun: IProduct)=>{
  //     setSepetList([...sepetList, urun]);
  // }
+ const db = getDatabase();
+  set(ref(db, 'users/1'), {
+    username: 'muhammet',
+    email: 'muhammet@gmail.com',
+    profile_picture : 'https://picsum.photos/100/100'
+  });
   console.log('producr page render');
   return (
     <div className="container">
